@@ -5,7 +5,7 @@
 **GitHub Profile:** [github.com/prahul25](https://github.com/prahul25)  
 **Repository:** [github.com/prahul25/house_of_edtech](https://github.com/prahul25/house_of_edtech)  
 **LinkedIn:** [linkedin.com/in/rahulkumarpal25](https://www.linkedin.com/in/rahulkumarpal25/)  
-**Live Production URL:** *(Deployable to Vercel in 1 click)*
+**Live Production URL:** [https://houseofedtech-vert.vercel.app](https://houseofedtech-vert.vercel.app)
 
 ---
 
