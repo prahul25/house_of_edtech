@@ -14,9 +14,7 @@ import {
   ChevronRight,
   Menu,
   X,
-  PlayCircle,
-  Sparkles,
-  Award,
+  Compass,
 } from "lucide-react";
 import { toggleLessonProgressAction } from "@/lib/actions/enrollment";
 import InLessonAITutor from "@/components/learn/InLessonAITutor";
@@ -76,12 +74,12 @@ export default function LessonViewer({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-[85vh] bg-slate-950">
+    <div className="flex flex-col lg:flex-row min-h-[85vh] bg-slate-950 animate-fade-in">
       {/* Mobile Sidebar Toggle Header */}
       <div className="lg:hidden p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="flex items-center gap-2 text-xs font-medium text-slate-300 bg-slate-800 px-3 py-2 rounded-xl"
+          className="flex items-center gap-2 text-xs font-medium text-slate-300 bg-slate-800 px-3 py-2 rounded-xl cursor-pointer"
         >
           {sidebarOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           <span>Curriculum Outline</span>
@@ -99,21 +97,21 @@ export default function LessonViewer({
         <div className="space-y-2 pb-4 border-b border-slate-800">
           <Link
             href={`/courses/${course.slug}`}
-            className="text-xs text-slate-400 hover:text-white flex items-center gap-1 mb-2"
+            className="text-xs text-slate-400 hover:text-white flex items-center gap-1 mb-2 transition-colors"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
             <span>Course Overview</span>
           </Link>
           <h2 className="text-sm font-bold text-white leading-snug">{course.title}</h2>
-          
+
           <div className="pt-2">
-            <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-              <span>Progress</span>
-              <span className="text-white font-medium">{progressPercent}%</span>
+            <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1.5">
+              <span>Course Progress</span>
+              <span className="text-white font-semibold">{progressPercent}%</span>
             </div>
-            <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-indigo-500 to-emerald-500 transition-all duration-500 rounded-full"
+                className="h-full bg-indigo-500 transition-all duration-500 rounded-full"
                 style={{ width: `${progressPercent}%` }}
               ></div>
             </div>
@@ -124,7 +122,7 @@ export default function LessonViewer({
         <div className="space-y-5">
           {course.modules.map((module: any, mIdx: number) => (
             <div key={module.id} className="space-y-2">
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                 Module {mIdx + 1}: {module.title}
               </div>
 
@@ -142,7 +140,7 @@ export default function LessonViewer({
                       }}
                       className={`w-full p-2.5 rounded-xl text-left text-xs transition-all flex items-center justify-between cursor-pointer ${
                         isActive
-                          ? "bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/20"
+                          ? "bg-indigo-600 text-white font-semibold shadow-sm"
                           : "text-slate-300 hover:bg-slate-800/60"
                       }`}
                     >
@@ -155,7 +153,7 @@ export default function LessonViewer({
                           />
                         ) : (
                           <Circle
-                            className={`w-4 h-4 flex-shrink-0 ${
+                            className={`w-3.5 h-3.5 flex-shrink-0 ${
                               isActive ? "text-white" : "text-slate-600"
                             }`}
                           />
@@ -182,7 +180,7 @@ export default function LessonViewer({
                     }}
                     className={`w-full p-2.5 rounded-xl text-left text-xs transition-all flex items-center justify-between cursor-pointer ${
                       activeItemId === module.quiz.id
-                        ? "bg-purple-600 text-white font-semibold shadow-md shadow-purple-600/20"
+                        ? "bg-purple-600 text-white font-semibold shadow-sm"
                         : "text-purple-300 hover:bg-purple-950/30 border border-purple-900/30"
                     }`}
                   >
@@ -190,7 +188,7 @@ export default function LessonViewer({
                       <HelpCircle className="w-4 h-4 text-purple-400 flex-shrink-0" />
                       <span className="truncate">{module.quiz.title}</span>
                     </div>
-                    <span className="text-[10px] text-purple-300 flex-shrink-0 font-medium">
+                    <span className="text-[10px] text-purple-300 flex-shrink-0 font-semibold">
                       Quiz
                     </span>
                   </button>
@@ -209,7 +207,7 @@ export default function LessonViewer({
             <div className="pb-6 border-b border-slate-800 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-xs text-indigo-400 font-semibold">
-                  <FileText className="w-4 h-4" />
+                  <FileText className="w-3.5 h-3.5" />
                   <span>Lesson Notes</span>
                   <span>•</span>
                   <span className="flex items-center gap-1 text-slate-400">
@@ -224,13 +222,13 @@ export default function LessonViewer({
                   className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
                     completedLessonIds.has(activeItem.data.id)
                       ? "bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 hover:bg-emerald-900/60"
-                      : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20"
+                      : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm"
                   }`}
                 >
                   <CheckCircle2 className="w-4 h-4" />
                   <span>
                     {completedLessonIds.has(activeItem.data.id)
-                      ? "Completed (Click to undo)"
+                      ? "Completed (Undo)"
                       : "Mark as Completed"}
                   </span>
                 </button>
@@ -254,7 +252,7 @@ export default function LessonViewer({
             )}
 
             {/* Markdown Lesson Content */}
-            <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 sm:p-8 backdrop-blur-xl prose prose-invert max-w-none text-slate-300 text-sm leading-relaxed space-y-4">
+            <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 sm:p-8 backdrop-blur-xl max-w-none text-slate-300 text-xs sm:text-sm leading-relaxed space-y-4 shadow-xl">
               <div className="whitespace-pre-wrap font-sans">{activeItem.data.content}</div>
             </div>
 
@@ -275,7 +273,7 @@ export default function LessonViewer({
               {nextItem && (
                 <button
                   onClick={() => setActiveItemId(nextItem.id)}
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-indigo-600/20 cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-sm cursor-pointer"
                 >
                   <span>Next: {nextItem.data.title}</span>
                   <ChevronRight className="w-4 h-4" />
@@ -283,7 +281,7 @@ export default function LessonViewer({
               )}
             </div>
 
-            {/* Floating In-Lesson AI Tutor Assistant */}
+            {/* Floating In-Lesson Copilot Assistant */}
             <InLessonAITutor
               lessonTitle={activeItem.data.title}
               lessonContent={activeItem.data.content}
@@ -311,7 +309,7 @@ export default function LessonViewer({
               {nextItem && (
                 <button
                   onClick={() => setActiveItemId(nextItem.id)}
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-md shadow-indigo-600/20 cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-sm cursor-pointer"
                 >
                   <span>Next: {nextItem.data.title}</span>
                   <ChevronRight className="w-4 h-4" />

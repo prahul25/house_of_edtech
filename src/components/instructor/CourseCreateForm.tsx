@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { createCourseAction } from "@/lib/actions/course";
 import { generateSyllabusAction, createCourseFromSyllabusAction } from "@/lib/actions/ai";
 import {
-  Sparkles,
+  Brain,
   BookOpen,
   ArrowLeft,
   CheckCircle,
@@ -13,6 +13,7 @@ import {
   HelpCircle,
   FileText,
   AlertCircle,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -72,7 +73,7 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       <div className="flex items-center gap-3">
         <Link
           href="/instructor"
@@ -81,8 +82,10 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-white">Create New Course</h1>
-          <p className="text-slate-400 text-sm">Author manually or generate a complete curriculum using AI</p>
+          <h1 className="text-2xl font-bold text-white">Create New Curriculum</h1>
+          <p className="text-slate-400 text-xs sm:text-sm">
+            Author manually or architect a complete curriculum structure with AI assistance
+          </p>
         </div>
       </div>
 
@@ -91,34 +94,34 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
         <button
           type="button"
           onClick={() => setTab("manual")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             tab === "manual"
-              ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
+              ? "bg-indigo-600 text-white shadow-sm shadow-indigo-600/20"
               : "bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800"
           }`}
         >
-          <BookOpen className="w-4 h-4" />
-          Manual Authoring
+          <BookOpen className="w-3.5 h-3.5" />
+          <span>Manual Authoring</span>
         </button>
         <button
           type="button"
           onClick={() => setTab("ai")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             tab === "ai"
-              ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/20"
+              ? "bg-purple-600 text-white shadow-sm shadow-purple-600/20"
               : "bg-slate-900/60 text-purple-300 hover:text-white border border-purple-900/40"
           }`}
         >
-          <Sparkles className="w-4 h-4 text-purple-400" />
-          AI Syllabus Builder
+          <Brain className="w-3.5 h-3.5 text-purple-400" />
+          <span>AI Curriculum Architect</span>
         </button>
       </div>
 
       {tab === "manual" ? (
         /* Manual Creation Form */
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 backdrop-blur-xl max-w-3xl">
+        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 backdrop-blur-xl max-w-3xl shadow-xl">
           {state.error && (
-            <div className="mb-6 flex items-center gap-2 p-3 text-sm text-rose-400 bg-rose-950/30 border border-rose-800/50 rounded-lg">
+            <div className="mb-6 flex items-center gap-2 p-3 text-xs text-rose-400 bg-rose-950/30 border border-rose-800/50 rounded-lg">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
               <span>{state.error}</span>
             </div>
@@ -126,15 +129,17 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
 
           <form action={formAction} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Course Title</label>
+              <label className="block text-xs font-semibold text-slate-300 mb-1">
+                Course Title
+              </label>
               <input
                 name="title"
                 type="text"
                 required
                 value={title}
                 onChange={handleTitleChange}
-                placeholder="e.g. Master React 19 & Next.js 16"
-                className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="e.g. Distributed Architecture in Go & Kubernetes"
+                className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm"
               />
               {state.fieldErrors?.title && (
                 <p className="mt-1 text-xs text-rose-400">{state.fieldErrors.title[0]}</p>
@@ -142,15 +147,17 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Course URL Slug</label>
+              <label className="block text-xs font-semibold text-slate-300 mb-1">
+                Course URL Slug
+              </label>
               <input
                 name="slug"
                 type="text"
                 required
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                placeholder="e.g. master-react-19-nextjs-16"
-                className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono text-sm"
+                placeholder="e.g. distributed-architecture-go-kubernetes"
+                className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono text-xs"
               />
               {state.fieldErrors?.slug && (
                 <p className="mt-1 text-xs text-rose-400">{state.fieldErrors.slug[0]}</p>
@@ -159,22 +166,24 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1">Category</label>
+                <label className="block text-xs font-semibold text-slate-300 mb-1">Category</label>
                 <input
                   name="category"
                   type="text"
                   required
                   defaultValue="Fullstack Development"
-                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-1">Difficulty</label>
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  Difficulty Level
+                </label>
                 <select
                   name="difficulty"
                   defaultValue="BEGINNER"
-                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm"
                 >
                   <option value="BEGINNER">Beginner</option>
                   <option value="INTERMEDIATE">Intermediate</option>
@@ -184,29 +193,19 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Description</label>
+              <label className="block text-xs font-semibold text-slate-300 mb-1">
+                Overview &amp; Objectives
+              </label>
               <textarea
                 name="description"
                 rows={4}
                 required
-                placeholder="Detailed summary of the curriculum, outcomes, and prerequisites..."
-                className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Describe key outcomes, prerequisites, and concepts covered in this curriculum..."
+                className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm"
               />
               {state.fieldErrors?.description && (
                 <p className="mt-1 text-xs text-rose-400">{state.fieldErrors.description[0]}</p>
               )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">
-                Thumbnail Image URL (Optional)
-              </label>
-              <input
-                name="thumbnail"
-                type="url"
-                placeholder="https://images.unsplash.com/..."
-                className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
             </div>
 
             <div className="flex items-center gap-2 pt-2">
@@ -217,22 +216,22 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
                 value="true"
                 className="w-4 h-4 rounded text-indigo-600 bg-slate-950 border-slate-700 focus:ring-indigo-500"
               />
-              <label htmlFor="isPublished" className="text-sm font-medium text-slate-300 cursor-pointer">
-                Publish immediately to student catalog
+              <label htmlFor="isPublished" className="text-xs font-medium text-slate-300 cursor-pointer">
+                Publish immediately to catalog
               </label>
             </div>
 
             <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
               <Link
                 href="/instructor"
-                className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={isPending}
-                className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all disabled:opacity-50 cursor-pointer flex items-center gap-2"
+                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-all disabled:opacity-50 cursor-pointer flex items-center gap-2 shadow-sm shadow-indigo-600/20"
               >
                 {isPending ? "Creating..." : "Create Course Studio"}
               </button>
@@ -242,18 +241,18 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
       ) : (
         /* AI Syllabus Builder Tab */
         <div className="space-y-6 max-w-4xl">
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl">
-            <div className="flex items-center gap-2 text-purple-400 font-semibold text-sm mb-2">
-              <Sparkles className="w-4 h-4" />
-              AI Curriculum Architect
+          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl space-y-4">
+            <div className="flex items-center gap-2 text-purple-400 font-bold text-xs uppercase tracking-wider">
+              <Brain className="w-4 h-4" />
+              <span>AI Curriculum Architect</span>
             </div>
-            <p className="text-slate-300 text-sm mb-4">
-              Enter any technology, framework, or concept. EduFlow AI will architect complete sequential modules, markdown lesson notes, and scored quizzes.
+            <p className="text-slate-300 text-xs sm:text-sm">
+              Enter any technical topic. EduFlow AI will architect sequential modules, lesson notes with code samples, and scored assessment questions.
             </p>
 
-            <form onSubmit={handleGenerateSyllabus} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <form onSubmit={handleGenerateSyllabus} className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               <div className="sm:col-span-3">
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
                   Topic / Subject
                 </label>
                 <input
@@ -261,26 +260,30 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
                   type="text"
                   required
                   placeholder="e.g. Distributed Systems in Go, Quantum Computing Basics, Docker & Kubernetes"
-                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-xs sm:text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Target Audience</label>
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  Target Audience
+                </label>
                 <input
                   name="targetAudience"
                   type="text"
-                  placeholder="e.g. Frontend devs transitioning to backend"
-                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                  placeholder="e.g. Intermediate engineers"
+                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-xs sm:text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Difficulty Level</label>
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  Difficulty Level
+                </label>
                 <select
                   name="difficulty"
                   defaultValue="BEGINNER"
-                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-xs sm:text-sm"
                 >
                   <option value="BEGINNER">Beginner</option>
                   <option value="INTERMEDIATE">Intermediate</option>
@@ -289,11 +292,13 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Number of Modules</label>
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  Number of Modules
+                </label>
                 <select
                   name="modulesCount"
                   defaultValue="3"
-                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                  className="w-full px-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-xs sm:text-sm"
                 >
                   <option value="2">2 Modules</option>
                   <option value="3">3 Modules</option>
@@ -305,16 +310,16 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
                 <button
                   type="submit"
                   disabled={aiLoading}
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-sm transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-purple-600/20"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 shadow-sm shadow-purple-600/20"
                 >
                   {aiLoading ? (
                     <>
-                      <span className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
-                      <span>Architecting Syllabus with AI...</span>
+                      <span className="inline-block animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-white"></span>
+                      <span>Architecting Curriculum...</span>
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4" />
+                      <Brain className="w-3.5 h-3.5" />
                       <span>Generate Full Syllabus</span>
                     </>
                   )}
@@ -324,7 +329,7 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
           </div>
 
           {aiError && (
-            <div className="flex items-center gap-2 p-4 text-sm text-rose-400 bg-rose-950/30 border border-rose-800/50 rounded-xl">
+            <div className="flex items-center gap-2 p-4 text-xs text-rose-400 bg-rose-950/30 border border-rose-800/50 rounded-xl">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
               <span>{aiError}</span>
             </div>
@@ -332,26 +337,28 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
 
           {/* Generated Syllabus Preview */}
           {generatedSyllabus && (
-            <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 backdrop-blur-xl space-y-6">
+            <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 backdrop-blur-xl space-y-6 shadow-2xl">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
                 <div>
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800/50 font-medium">
-                    AI Generated Preview
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-md bg-purple-950 text-purple-300 border border-purple-800/50 font-semibold uppercase tracking-wider">
+                    Generated Architecture
                   </span>
-                  <h2 className="text-2xl font-bold text-white mt-1">{generatedSyllabus.title}</h2>
-                  <p className="text-slate-400 text-sm mt-1">{generatedSyllabus.description}</p>
+                  <h2 className="text-xl sm:text-2xl font-bold text-white mt-1">
+                    {generatedSyllabus.title}
+                  </h2>
+                  <p className="text-slate-400 text-xs mt-1">{generatedSyllabus.description}</p>
                 </div>
                 <button
                   onClick={handleSaveAiCourse}
                   disabled={savingAiCourse}
-                  className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 whitespace-nowrap"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 shadow-sm shadow-emerald-600/20 whitespace-nowrap"
                 >
                   {savingAiCourse ? (
                     "Publishing to Database..."
                   ) : (
                     <>
                       <CheckCircle className="w-4 h-4" />
-                      <span>Save & Create Studio Course</span>
+                      <span>Save &amp; Create Studio Course</span>
                     </>
                   )}
                 </button>
@@ -359,7 +366,7 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
 
               {/* Modules breakdown */}
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">
+                <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
                   Generated Curriculum Modules ({generatedSyllabus.modules?.length || 0})
                 </h3>
                 {generatedSyllabus.modules?.map((mod: any, mIdx: number) => (
@@ -367,7 +374,7 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
                     key={mIdx}
                     className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 space-y-3"
                   >
-                    <div className="flex items-center gap-2 text-white font-medium">
+                    <div className="flex items-center gap-2 text-white font-medium text-xs sm:text-sm">
                       <Layers className="w-4 h-4 text-purple-400" />
                       <span>{mod.title}</span>
                     </div>
@@ -382,7 +389,7 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
                             <FileText className="w-3.5 h-3.5 text-indigo-400" />
                             {les.title}
                           </span>
-                          <span className="text-slate-500">{les.durationMinutes} mins</span>
+                          <span className="text-slate-500 text-[11px]">{les.durationMinutes}m</span>
                         </div>
                       ))}
 
@@ -392,7 +399,7 @@ export default function CourseCreateForm({ defaultTab = "manual" }: { defaultTab
                             <HelpCircle className="w-3.5 h-3.5 text-purple-400" />
                             {mod.quiz.title} ({mod.quiz.questions?.length || 0} Questions)
                           </span>
-                          <span className="text-purple-400 font-medium">
+                          <span className="text-purple-400 font-medium text-[11px]">
                             Pass: {mod.quiz.passingScore}%
                           </span>
                         </div>

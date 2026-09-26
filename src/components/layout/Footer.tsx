@@ -27,24 +27,24 @@ export function Footer() {
   const repoUrl = "https://github.com/prahul25/house_of_edtech";
 
   return (
-    <footer className="mt-auto border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+    <footer className="mt-auto border-t border-slate-800/80 bg-slate-950">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800/80">
           {/* Brand & Purpose */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white shadow-sm">
                 <GraduationCap className="h-4 w-4" />
               </div>
-              <span className="text-base font-bold tracking-tight text-zinc-900 dark:text-white">
+              <span className="text-base font-bold tracking-tight text-white">
                 EduFlow AI
               </span>
             </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              An enterprise-grade, adaptive learning management and course studio platform developed for the{" "}
-              <strong className="text-zinc-900 dark:text-zinc-200">House of Edtech</strong> Fullstack Developer Assignment.
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Adaptive curriculum studio &amp; student learning platform engineered for the{" "}
+              <strong className="text-slate-200">House of Edtech</strong> Fullstack Developer Assignment.
             </p>
-            <div className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+            <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
               <CheckCircle2 className="h-3.5 w-3.5" />
               <span>Next.js 16 • React 19 • PostgreSQL (Neon) • Prisma</span>
             </div>
@@ -52,22 +52,22 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-300">
               Platform Modules
             </h3>
-            <ul className="space-y-2 text-xs text-zinc-600 dark:text-zinc-400">
+            <ul className="space-y-2 text-xs text-slate-400">
               <li>
-                <Link href="/courses" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <Link href="/courses" className="hover:text-indigo-400 transition-colors">
                   Course Catalog &amp; Search
                 </Link>
               </li>
               <li>
-                <Link href="/instructor" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <Link href="/instructor" className="hover:text-indigo-400 transition-colors">
                   Instructor Studio (Curriculum &amp; Quiz Builder)
                 </Link>
               </li>
               <li>
-                <Link href="/my-learning" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                <Link href="/my-learning" className="hover:text-indigo-400 transition-colors">
                   Student Learning &amp; Assessment Engine
                 </Link>
               </li>
@@ -75,23 +75,23 @@ export function Footer() {
           </div>
 
           {/* Mandatory Candidate Compliance Section */}
-          <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 p-4 dark:border-indigo-950 dark:bg-indigo-950/20">
-            <div className="flex items-center gap-2 mb-2">
-              <Shield className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-              <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-900 dark:text-indigo-200">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4.5 backdrop-blur-xl space-y-3">
+            <div className="flex items-center gap-2">
+              <Shield className="h-4 w-4 text-indigo-400" />
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
                 Candidate Information
               </h3>
             </div>
-            <p className="text-xs text-zinc-700 dark:text-zinc-300 font-medium">
-              Developed by <span className="font-bold text-zinc-900 dark:text-white">{candidateName}</span>
+            <p className="text-xs text-slate-300 font-medium">
+              Developed by <span className="font-bold text-white">{candidateName}</span>
             </p>
 
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 pt-1">
               <a
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 shadow-sm hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 px-2.5 py-1.5 text-xs font-medium text-slate-200 border border-slate-700/80 transition-colors"
               >
                 <GithubIcon className="h-3.5 w-3.5" />
                 <span>GitHub Profile</span>
@@ -102,7 +102,7 @@ export function Footer() {
                 href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md bg-[#0077b5] px-2.5 py-1 text-xs font-medium text-white shadow-sm hover:bg-[#006097] transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#0077b5]/90 hover:bg-[#0077b5] px-2.5 py-1.5 text-xs font-medium text-white shadow-sm transition-colors"
               >
                 <LinkedinIcon className="h-3.5 w-3.5" />
                 <span>LinkedIn Profile</span>
@@ -113,9 +113,9 @@ export function Footer() {
                 href={repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md bg-zinc-900 px-2.5 py-1 text-xs font-medium text-white shadow-sm hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 px-2.5 py-1.5 text-xs font-medium text-slate-200 border border-slate-700/80 transition-colors"
               >
-                <Code2 className="h-3.5 w-3.5" />
+                <Code2 className="h-3.5 w-3.5 text-indigo-400" />
                 <span>Repository</span>
                 <ExternalLink className="h-2.5 w-2.5 opacity-60" />
               </a>
@@ -123,12 +123,9 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright / assignment footer */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 gap-2">
-          <p>© {new Date().getFullYear()} EduFlow AI. Built for House of Edtech Fullstack Assessment.</p>
-          <p className="flex items-center gap-1">
-            Developed with Next.js 16 App Router &amp; Tailwind CSS
-          </p>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+          <p>© 2026 EduFlow AI. Built for House of Edtech Fullstack Assessment.</p>
+          <p className="flex items-center gap-1">Developed with Next.js 16 App Router &amp; Tailwind CSS</p>
         </div>
       </div>
     </footer>

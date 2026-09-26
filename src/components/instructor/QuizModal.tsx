@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { upsertQuizAction } from "@/lib/actions/quiz";
 import { generateQuizAIAction } from "@/lib/actions/ai";
-import { X, HelpCircle, Plus, Trash2, Sparkles, Check } from "lucide-react";
+import { X, HelpCircle, Plus, Trash2, Brain, Check } from "lucide-react";
 
 export default function QuizModal({
   courseId,
@@ -155,16 +155,16 @@ export default function QuizModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
       <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-5">
         <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-          <div className="flex items-center gap-2 text-white font-bold text-lg">
+          <div className="flex items-center gap-2 text-white font-bold text-base">
             <HelpCircle className="w-5 h-5 text-purple-400" />
-            <span>{quiz ? "Edit Assessment & Quiz" : "Create Assessment & Quiz"}</span>
+            <span>{quiz ? "Edit Assessment" : "Create Assessment"}</span>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -172,10 +172,10 @@ export default function QuizModal({
 
         {/* AI Quiz Generator Toolbar */}
         {availableLessons.length > 0 && (
-          <div className="bg-purple-950/30 border border-purple-800/40 rounded-xl p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="bg-purple-950/20 border border-purple-800/40 rounded-xl p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-xs text-purple-200">
-              <Sparkles className="w-4 h-4 text-purple-400 flex-shrink-0" />
-              <span>Auto-generate questions from lesson text:</span>
+              <Brain className="w-4 h-4 text-purple-400 flex-shrink-0" />
+              <span>Draft questions from lesson notes:</span>
             </div>
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <select
@@ -193,10 +193,10 @@ export default function QuizModal({
                 type="button"
                 onClick={handleGenerateAIQuiz}
                 disabled={aiGenerating}
-                className="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium transition-all disabled:opacity-50 cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-md shadow-purple-600/20"
+                className="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition-all disabled:opacity-50 cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-sm shadow-purple-600/20"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{aiGenerating ? "Generating..." : "Generate AI Questions"}</span>
+                <Brain className="w-3.5 h-3.5" />
+                <span>{aiGenerating ? "Generating..." : "Generate Questions"}</span>
               </button>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function QuizModal({
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
 
@@ -230,19 +230,19 @@ export default function QuizModal({
               max="100"
               value={passingScore}
               onChange={(e) => setPassingScore(Number(e.target.value))}
-              className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
 
           <div className="sm:col-span-3">
             <label className="block text-xs font-medium text-slate-300 mb-1">
-              Instructions / Description
+              Instructions
             </label>
             <input
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-950 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
         </div>
@@ -250,13 +250,13 @@ export default function QuizModal({
         {/* Questions Section */}
         <div className="space-y-4 pt-2">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-bold text-white">
+            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
               Questions ({questions.length})
             </h4>
             <button
               type="button"
               onClick={handleAddQuestion}
-              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1 transition-all cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Question</span>
@@ -297,21 +297,21 @@ export default function QuizModal({
                 {/* Choices */}
                 <div className="space-y-2">
                   <label className="block text-[11px] font-medium text-slate-400">
-                    Choices (select the radio button next to the correct answer)
+                    Choices (click radio button to set correct answer)
                   </label>
                   {q.choices.map((c: any, cIdx: number) => (
                     <div key={cIdx} className="flex items-center gap-2">
                       <button
                         type="button"
                         onClick={() => handleSetCorrectChoice(qIdx, cIdx)}
-                        className={`flex items-center justify-center w-6 h-6 rounded-full border transition-all cursor-pointer ${
+                        className={`flex items-center justify-center w-5 h-5 rounded-full border transition-all cursor-pointer ${
                           c.isCorrect
                             ? "bg-emerald-600 border-emerald-500 text-white"
                             : "bg-slate-900 border-slate-700 text-transparent hover:border-slate-500"
                         }`}
                         title="Mark as correct answer"
                       >
-                        <Check className="w-3.5 h-3.5" />
+                        <Check className="w-3 h-3" />
                       </button>
 
                       <input
@@ -332,7 +332,7 @@ export default function QuizModal({
                     type="text"
                     value={q.explanation || ""}
                     onChange={(e) => handleExplanationChange(qIdx, e.target.value)}
-                    placeholder="Answer explanation / justification shown to students after submitting..."
+                    placeholder="Explanation shown after submission..."
                     className="w-full px-3 py-1.5 bg-slate-900/60 border border-slate-800 rounded-lg text-slate-300 text-xs focus:outline-none focus:ring-1 focus:ring-purple-500 italic"
                   />
                 </div>
@@ -346,7 +346,7 @@ export default function QuizModal({
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white"
+            className="px-4 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-white cursor-pointer"
           >
             Cancel
           </button>
@@ -354,9 +354,9 @@ export default function QuizModal({
             type="button"
             onClick={handleSaveQuiz}
             disabled={loading}
-            className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-medium text-xs transition-all disabled:opacity-50 cursor-pointer shadow-md shadow-purple-600/20"
+            className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs transition-all disabled:opacity-50 cursor-pointer shadow-sm shadow-purple-600/20"
           >
-            {loading ? "Saving Quiz..." : "Save Assessment"}
+            {loading ? "Saving..." : "Save Assessment"}
           </button>
         </div>
       </div>
